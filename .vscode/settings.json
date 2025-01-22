@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/ramzy/delivery_robot_nav2/install/delivery_robot_spawn/lib/python3.10/site-packages",
+        "/home/ramzy/delivery_robot_nav2/install/bno055/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/ramzy/delivery_robot_nav2/install/delivery_robot_spawn/lib/python3.10/site-packages",
+        "/home/ramzy/delivery_robot_nav2/install/bno055/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
