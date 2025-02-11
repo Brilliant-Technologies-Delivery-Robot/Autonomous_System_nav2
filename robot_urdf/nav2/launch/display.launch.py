@@ -9,7 +9,7 @@ def generate_launch_description():
 
     # Paths to URDF and RViz config
     default_model_path = os.path.join(pkg_share, 'src/description/urdf_assem.urdf')
-    default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
+    default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config2.rviz')
 
     # Nodes
     robot_state_publisher_node = launch_ros.actions.Node(
