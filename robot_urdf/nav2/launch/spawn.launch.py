@@ -15,7 +15,7 @@ def generate_launch_description():
     namePackage = 'nav2'
 
     # Paths to URDF, RViz config, and world
-    urdfModelPath = os.path.join(get_package_share_directory(namePackage), '/home/alaa/ros2_ws/src/Autonomous_System_nav2/robot_urdf/nav2/src/description/urdf_assem.urdf')
+    urdfModelPath = os.path.join(get_package_share_directory(namePackage), './src/description/urdf_assem.urdf')
   #  worldPath = os.path.join(get_package_share_directory(namePackage), 'worlds/neighborhood.world')
     worldPath = os.path.join(get_package_share_directory(namePackage), 'worlds/turtlebot3_world.world')
     rvizConfigPath = os.path.join(get_package_share_directory(namePackage), 'rviz', 'urdf_config2.rviz')
@@ -44,7 +44,7 @@ def generate_launch_description():
     spawnModelNode = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        arguments=['-topic', 'robot_description', '-entity', robotName,'-x', '0', '-y', '0', '-z', '0','-Y', '-1.5708' ],
+        arguments=['-topic', 'robot_description', '-entity', robotName,'-x', '-2.0', '-y', '0', '-z', '0','-Y', '-1.5708' ],
         output='screen'
     )
     
@@ -71,22 +71,22 @@ def generate_launch_description():
     #     condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
     # )
     
-    rviz_node = launch_ros.actions.Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', rvizConfigPath]  # Pass the RViz config file
-    )
+    # rviz_node = launch_ros.actions.Node(
+    #     package='rviz2',
+    #     executable='rviz2',
+    #     name='rviz2',
+    #     output='screen',
+    #     arguments=['-d', rvizConfigPath]  # Pass the RViz config file
+    # )
     
-    # Robot Localization Node
-    robot_localization_node = launch_ros.actions.Node(
-        package='robot_localization',
-        executable='ekf_node',
-        name='ekf_filter_node',
-        output='screen',
-        parameters=[ekfConfigPath,{'use_sim_time': True}]
-    )
+    # # Robot Localization Node
+    # robot_localization_node = launch_ros.actions.Node(
+    #     package='robot_localization',
+    #     executable='ekf_node',
+    #     name='ekf_filter_node',
+    #     output='screen',
+    #     parameters=[ekfConfigPath,{'use_sim_time': True}]
+    # )
 
     # Launch description  
     launchDescriptionObject = LaunchDescription()
@@ -94,6 +94,6 @@ def generate_launch_description():
     launchDescriptionObject.add_action(spawnModelNode)
     launchDescriptionObject.add_action(robot_state_publisher_node)
     launchDescriptionObject.add_action(joint_state_publisher_node)
-    launchDescriptionObject.add_action(rviz_node)
-    launchDescriptionObject.add_action(robot_localization_node)
+    # launchDescriptionObject.add_action(rviz_node)
+    # launchDescriptionObject.add_action(robot_localization_node)
     return launchDescriptionObject
