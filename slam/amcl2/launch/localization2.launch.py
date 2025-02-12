@@ -6,11 +6,79 @@ from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
 from launch.actions import ExecuteProcess
 from launch.substitutions import LaunchConfiguration
 from nav2_common.launch import RewrittenYaml
+from launch.actions import TimerAction
 
 
+initial_pose = {
+    "header": {"frame_id": "map"},
+    "pose": {
+        "pose": {
+            "position": {"x": 0.0, "y": 0.0, "z": 0.0},
+            "orientation": {"x": 0.0, "y": 0.0, "z": 0.0, "w": 1.0},
+        },
+        "covariance": [
+            0.25,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.25,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.25,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.25,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.25,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0.25,
+        ],
+    },
+}
+
+set_initial_pose = ExecuteProcess(
+    cmd=[
+        "ros2",
+        "topic",
+        "pub",
+        "/initialpose",
+        "geometry_msgs/msg/PoseWithCovarianceStamped",
+        str(initial_pose),
+    ],
+    output="screen",
+)
 
 
 def generate_launch_description():
+
+
+    use_sim_time = True
+    autostart = True
+    save_map_timeout = 2000
+    free_thresh_default = 0.25
+    occupied_thresh_default = 0.65
+    
     bringup_dir = get_package_share_directory("amcl2")
 
     # Declare launch arguments
@@ -43,8 +111,13 @@ def generate_launch_description():
         executable="map_server",
         name="map_server",
         output="screen",
-        parameters=[{"yaml_filename": map_file_path}],
-    )
+        parameters=[{"yaml_filename": map_file_path},
+                    {'save_map_timeout': save_map_timeout},
+                    {'free_thresh_default': free_thresh_default},
+                    {'occupied_thresh_default': occupied_thresh_default}],
+                    
+                    
+        respawn=True,)
 
     amcl_cmd = Node(
         package="nav2_amcl",
@@ -54,6 +127,7 @@ def generate_launch_description():
         namespace=namespace,
         parameters=[configured_params],
         remappings=remappings,
+        respawn=True,
     )
 
     lifecycle_nodes = ["map_server", "amcl"]
@@ -69,7 +143,12 @@ def generate_launch_description():
             {"node_names": lifecycle_nodes},
         ],
     )
+    
+    restart_map_server = TimerAction(
+            period=0.1,  # Restart every 10 seconds
+            actions=[map_server_cmd],)
 
+          
     # Return launch description with properly added actions
     return LaunchDescription(
         [
@@ -101,6 +180,8 @@ def generate_launch_description():
             map_server_cmd,
             amcl_cmd,
             start_lifecycle_manager_cmd,
-     
+            set_initial_pose,
+            
+            
         ]
     )
