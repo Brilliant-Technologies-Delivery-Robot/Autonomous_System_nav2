@@ -79,14 +79,14 @@ def generate_launch_description():
     #     arguments=['-d', rvizConfigPath]  # Pass the RViz config file
     # )
     
-    # Robot Localization Node
-    robot_localization_node = launch_ros.actions.Node(
-        package='robot_localization',
-        executable='ekf_node',
-        name='ekf_filter_node',
-        output='screen',
-        parameters=[ekfConfigPath,{'use_sim_time': True}]
-    )
+    # # Robot Localization Node
+    # robot_localization_node = launch_ros.actions.Node(
+    #     package='robot_localization',
+    #     executable='ekf_node',
+    #     name='ekf_filter_node',
+    #     output='screen',
+    #     parameters=[ekfConfigPath,{'use_sim_time': True}]
+    # )
 
     # Launch description  
     launchDescriptionObject = LaunchDescription()
@@ -95,5 +95,5 @@ def generate_launch_description():
     launchDescriptionObject.add_action(robot_state_publisher_node)
     launchDescriptionObject.add_action(joint_state_publisher_node)
     # launchDescriptionObject.add_action(rviz_node)
-    launchDescriptionObject.add_action(robot_localization_node)
+    # launchDescriptionObject.add_action(robot_localization_node)
     return launchDescriptionObject
