@@ -7,6 +7,7 @@ from launch.actions import ExecuteProcess
 from launch.substitutions import LaunchConfiguration
 from nav2_common.launch import RewrittenYaml
 from launch.actions import TimerAction
+import launch_ros.actions
 
 
 initial_pose = {
@@ -107,17 +108,18 @@ def generate_launch_description():
 
     # Nodes
     map_server_cmd = Node(
-        package="nav2_map_server",
-        executable="map_server",
-        name="map_server",
-        output="screen",
-        parameters=[{"yaml_filename": map_file_path},
-                    {'save_map_timeout': save_map_timeout},
-                    {'free_thresh_default': free_thresh_default},
-                    {'occupied_thresh_default': occupied_thresh_default}],
+       package="nav2_map_server",
+       executable="map_server",
+       name="map_server",
+       output="screen",
+       parameters=[{"yaml_filename": map_file_path},
+                   {'save_map_timeout': save_map_timeout},
+                   {'free_thresh_default': free_thresh_default},
+                   {'occupied_thresh_default': occupied_thresh_default}],
                     
                     
-        respawn=True,)
+      respawn=True,)
+
 
     amcl_cmd = Node(
         package="nav2_amcl",
@@ -144,11 +146,8 @@ def generate_launch_description():
         ],
     )
     
-    restart_map_server = TimerAction(
-            period=0.1,  # Restart every 10 seconds
-            actions=[map_server_cmd],)
-
-          
+    
+ 
     # Return launch description with properly added actions
     return LaunchDescription(
         [
@@ -177,11 +176,11 @@ def generate_launch_description():
                 description="Full path to the ROS2 parameters file to use",
             ),
             # Add node actions
-            map_server_cmd,
+           
             amcl_cmd,
             start_lifecycle_manager_cmd,
             set_initial_pose,
-            
+            map_server_cmd,
             
         ]
     )

@@ -15,6 +15,7 @@ setup(
         (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
         (os.path.join('share', package_name, 'params'), glob('params/*.yaml')),  # Include params directory
         (os.path.join('share', package_name, 'maps'), glob('maps/*')), 
+        (os.path.join('share', package_name, 'rviz2'), ['rviz2/view_map.rviz']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
