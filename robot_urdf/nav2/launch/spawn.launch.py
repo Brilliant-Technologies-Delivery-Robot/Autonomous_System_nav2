@@ -15,7 +15,7 @@ def generate_launch_description():
     namePackage = 'nav2'
 
     # Paths to URDF, RViz config, and world
-    urdfModelPath = os.path.join(get_package_share_directory(namePackage), '/home/alaa/ros2_ws/src/Autonomous_System_nav2/robot_urdf/nav2/src/description/urdf_assem.urdf')
+    urdfModelPath = os.path.join(get_package_share_directory(namePackage), './src/description/urdf_assem.urdf')
   #  worldPath = os.path.join(get_package_share_directory(namePackage), 'worlds/neighborhood.world')
     worldPath = os.path.join(get_package_share_directory(namePackage), 'worlds/turtlebot3_world.world')
     rvizConfigPath = os.path.join(get_package_share_directory(namePackage), 'rviz', 'urdf_config2.rviz')

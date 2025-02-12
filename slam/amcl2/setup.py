@@ -14,7 +14,7 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
         (os.path.join('share', package_name, 'params'), glob('params/*.yaml')),  # Include params directory
-        (os.path.join('share', package_name, 'maps'), glob('maps/*.yaml')), 
+        (os.path.join('share', package_name, 'maps'), glob('maps/*')), 
     ],
     install_requires=['setuptools'],
     zip_safe=True,
