@@ -16,6 +16,9 @@ def generate_launch_description():
             executable='sync_slam_toolbox_node',
             name='slam_toolbox',
             output='screen',
-            parameters=[config_file]
+            parameters=[config_file],
+            remappings=[
+                ('/map', '/map')  # Ensure proper map topic remapping if needed
+            ]
         )
     ])
