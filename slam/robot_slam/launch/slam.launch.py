@@ -7,7 +7,7 @@ def generate_launch_description():
     config_file = os.path.join(
         get_package_share_directory('robot_slam'),
         'config',
-        'mapping_params.yaml'
+        'slam_params.yaml'
     )
 
     return LaunchDescription([
