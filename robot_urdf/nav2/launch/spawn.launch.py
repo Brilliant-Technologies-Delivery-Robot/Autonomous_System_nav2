@@ -40,6 +40,12 @@ def generate_launch_description():
         gazebo_rosPackageLaunch,
         launch_arguments={'world': worldPath}.items()
     )
+
+    Node(
+    package='gazebo_ros',
+    executable='gzserver',
+    arguments=['-s', 'libgazebo_ros_factory.so'],
+    )
     
     spawnModelNode = Node(
         package='gazebo_ros',
