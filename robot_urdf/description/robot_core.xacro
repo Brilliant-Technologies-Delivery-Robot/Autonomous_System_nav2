@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+<!-- Base Footprint Setup -->
+
+<link name="base_footprint" />
+<joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="base_footprint" />
+</joint>
+
+<!-- Base Link Body -->
+
+<link name="base_link">
+    <inertial>
+        <origin xyz="-0.010357 0.00080258 0.12082" rpy="0 0 0" />
+        <mass value="3.3192" />
+        <inertia
+        ixx="0.058318"
+        ixy="0.00047719"
+        ixz="0.0017019"
+        iyy="0.049572"
+        iyz="1.0982E-05"
+        izz="0.090114" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://robot_urdf/meshes/base_link.STL" />
+        </geometry>
+        <material name="">
+            <color rgba="0.79216 0.81961 0.93333 1" />
+        </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://robot_urdf/meshes/base_link.STL" />
+        </geometry>
+    </collision>
+</link>
+
+<gazebo reference="base_link">
+    <material>Gazebo/White</material>
+    <mu1 value="0.001"/>
+    <mu2 value="0.001"/>
+</gazebo>
+
+
+<!-- Right Wheel + Joint -->
+
+<link name="right_wheel">
+    <inertial>
+        <origin xyz="-1.7659E-14 -6.4782E-14 -2.6336E-05" rpy="0 0 0" />
+        <mass value="0.15848" />
+        <inertia
+        ixx="0.00022462"
+        ixy="5.5078E-17"
+        ixz="-1.9887E-17"
+        iyy="0.00022462"
+        iyz="-7.6718E-17"
+        izz="0.00043866" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://robot_urdf/meshes/right_wheel.STL" />
+        </geometry>
+        <material name="">
+            <color rgba="0.79216 0.81961 0.93333 1" />
+        </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://robot_urdf/meshes/right_wheel.STL" />
+        </geometry>
+    </collision>
+</link>
+
+<joint name="right_wheel_joint" type="continuous">
+    <origin xyz="0.0005 -0.15942 0.065" rpy="-1.5708 0 -3.1416" />
+    <parent link="base_link" />
+    <child link="right_wheel" />
+    <axis xyz="0 0 -1" />
+</joint>
+
+<gazebo reference="right_wheel">
+    <material>Gazebo/Black</material>
+</gazebo>
+
+<!-- Left Wheel + Joint -->
+
+<link name="left_wheel">
+    <inertial>
+        <origin xyz="5.8898E-14 -3.228E-14 2.6336E-5" rpy="0 0 0" />
+        <mass value="0.15848" />
+        <inertia
+            ixx="0.00022462"
+            ixy="-7.1336E-17"
+            ixz="-6.9014E-17"
+            iyy="0.00022462"
+            iyz="3.8969E-17"
+            izz="0.00043866" />
+    </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://robot_urdf/meshes/left_wheel.STL" />
+        </geometry>
+        <material name="">
+            <color rgba="0.79216 0.81961 0.93333 1" />
+        </material>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://robot_urdf/meshes/left_wheel.STL" />
+        </geometry>
+    </collision>
+</link>
+
+<joint name="left_wheel_joint" type="continuous">
+    <origin xyz="0.0005 0.15807 0.065" rpy="-1.5708 0 0" />
+    <parent link="base_link" />
+    <child link="left_wheel" />
+    <axis xyz="0 0 1" />
+</joint>
+
+<gazebo reference="left_wheel">
+    <material>Gazebo/Black</material>
+</gazebo>
+
+</robot>
