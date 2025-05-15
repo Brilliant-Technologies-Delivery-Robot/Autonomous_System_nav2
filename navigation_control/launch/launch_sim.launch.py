@@ -46,6 +46,12 @@ def generate_launch_description():
                                    '-entity', robotName,'-x', '0', '-y', '0', '-z', '0','-Y', '0' ],
                         output='screen'
     )
+
+    joystick = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','joystick.launch.py'
+                )]), launch_arguments={'use_sim_time': 'true'}.items()
+    )
     
     twist_mux = Node(
         package="twist_mux",
@@ -83,5 +89,6 @@ def generate_launch_description():
         diff_drive_spawner,
         joint_broad_spawner,
         twist_mux,
+        joystick,
         # rviz_node
     ])
