@@ -5,7 +5,7 @@
 <robot
   name="urdf_assem">
   <!-- add virtual joint between base_link and base_footprint-->
-  <!-- <link name="base_footprint" />
+   <!-- <link name="base_footprint" />
   <joint name="base_footprint_joint" type="fixed">
   <origin
     xyz="0 0 0" rpy="0 0 0" />
@@ -160,7 +160,7 @@
       xyz="0 0 1" />
   </joint>
   <link
-    name="lidar_link">
+    name="laser">
     <inertial>
       <origin
         xyz="0.0016703 0.010632 -0.018432"
@@ -200,14 +200,14 @@
     </collision>
   </link>
   <joint
-    name="lidar_joint" type="fixed">
+    name="laser" type="fixed">
     <origin
       xyz="-0.0011383 -0.11245 0.29097"
       rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
-      link="lidar_link" />
+      link="laser" />
     <axis
       xyz="0 0 0" />
   </joint>
@@ -314,7 +314,7 @@
   </plugin>
 </gazebo>
 
-<gazebo reference="lidar_link">
+<gazebo reference="laser">
   <sensor name="lidar" type="ray">
     <always_on>true</always_on>
     <visualize>true</visualize>
@@ -344,7 +344,7 @@
         <remapping>~/out:=scan</remapping>
       </ros>
       <output_type>sensor_msgs/LaserScan</output_type>
-      <frame_name>lidar_link</frame_name>
+      <frame_name>laser</frame_name>
     </plugin>
   </sensor>
 </gazebo>

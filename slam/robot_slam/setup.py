@@ -23,6 +23,8 @@ setup(
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [],
+        'console_scripts': [
+        ' sub = robot_slam.sub:main',],
+        
     },
 )

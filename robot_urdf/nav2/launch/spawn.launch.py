@@ -19,12 +19,12 @@ def generate_launch_description():
   #  worldPath = os.path.join(get_package_share_directory(namePackage), 'worlds/neighborhood.world')
     worldPath = os.path.join(get_package_share_directory(namePackage), 'worlds/turtlebot3_world.world')
     rvizConfigPath = os.path.join(get_package_share_directory(namePackage), 'rviz', 'urdf_config2.rviz')
-    ekfConfigPath = os.path.join(get_package_share_directory(namePackage), 'config', 'ekf.yaml')
+   # ekfConfigPath = os.path.join(get_package_share_directory(namePackage), 'config', 'ekf.yaml')
   
     with open(urdfModelPath, 'r') as infp:
         robot_desc = infp.read()
 
-    params = {'robot_description': robot_desc, 'use_sim_time': True}
+    params = {'robot_description': robot_desc, 'use_sim_time': False}
        
     pkg_share_path = os.pathsep + os.path.join(get_package_prefix(namePackage), 'share')
     if 'GAZEBO_MODEL_PATH' in os.environ:
@@ -42,10 +42,10 @@ def generate_launch_description():
     )
 
     Node(
-    package='gazebo_ros',
-    executable='gzserver',
-    arguments=['-s', 'libgazebo_ros_factory.so'],
-    )
+       package='gazebo_ros',
+       executable='gzserver',
+       arguments=['-s', 'libgazebo_ros_factory.so'],
+    ) 
     
     spawnModelNode = Node(
         package='gazebo_ros',
@@ -77,13 +77,13 @@ def generate_launch_description():
     #     condition=launch.conditions.IfCondition(LaunchConfiguration('gui'))
     # )
     
-    # rviz_node = launch_ros.actions.Node(
-    #     package='rviz2',
-    #     executable='rviz2',
-    #     name='rviz2',
-    #     output='screen',
-    #     arguments=['-d', rvizConfigPath]  # Pass the RViz config file
-    # )
+    rviz_node = launch_ros.actions.Node(
+         package='rviz2',
+         executable='rviz2',
+         name='rviz2',
+         output='screen',
+         arguments=['-d', rvizConfigPath]  # Pass the RViz config file
+     )
     
     # # Robot Localization Node
     # robot_localization_node = launch_ros.actions.Node(
@@ -100,6 +100,6 @@ def generate_launch_description():
     launchDescriptionObject.add_action(spawnModelNode)
     launchDescriptionObject.add_action(robot_state_publisher_node)
     launchDescriptionObject.add_action(joint_state_publisher_node)
-    # launchDescriptionObject.add_action(rviz_node)
+    launchDescriptionObject.add_action(rviz_node)
     # launchDescriptionObject.add_action(robot_localization_node)
     return launchDescriptionObject

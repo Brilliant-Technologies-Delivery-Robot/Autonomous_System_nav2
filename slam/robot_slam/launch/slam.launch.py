@@ -18,7 +18,8 @@ def generate_launch_description():
             output='screen',
             parameters=[config_file],
             remappings=[
-                ('/map', '/map')  # Ensure proper map topic remapping if needed
+                ('/map', '/map')# Ensure proper map topic remapping if needed
+               # ('/odom', '/hoverboard_velocity_controller/odom') 
             ]
         )
     ])

@@ -53,15 +53,15 @@ def generate_launch_description():
 
    return LaunchDescription([
        Static Transform Publisher (map -> odom)
-        Node(
-            package="tf2_ros",
-            executable="static_transform_publisher",
-            arguments=["0", "0", "0", "0", "0", "0", "map", "odom"],
-            name="static_tf_map_odom"
+       Node(
+           package="tf2_ros",
+           executable="static_transform_publisher",
+           arguments=["0", "0", "0", "0", "0", "0", "map", "raw_odom"],
+           name="static_tf_map_odom"
         ),
 
     lifecycle_nodes = ["rviz2","map_server"]
-    use_sim_time = True
+    use_sim_time = True 
     autostart = True
 
     start_lifecycle_manager_cmd = Node(
