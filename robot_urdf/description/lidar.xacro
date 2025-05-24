@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     
-    <link name="laser_frame">
+    <link name="laser">
     <inertial>
       <origin
         xyz="0.010632 -0.0016703 -0.018432"
@@ -37,23 +37,23 @@
     </collision>
   </link>
 
-  <joint name="laser_joint" type="fixed">
+  <joint name="laser" type="fixed">
     <origin
       xyz="-0.11245 0.0011383 0.29097"
       rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
-      link="laser_frame" />
+      link="laser" />
     <axis
       xyz="0 0 0" />
   </joint>
 
-  <gazebo reference="laser_frame">
+  <gazebo reference="laser">
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <gazebo reference="laser_frame">
+  <gazebo reference="laser">
     <sensor name="lidar" type="ray">
       <always_on>true</always_on>
       <visualize>true</visualize>
@@ -83,7 +83,7 @@
           <remapping>~/out:=scan</remapping>
         </ros>
         <output_type>sensor_msgs/LaserScan</output_type>
-        <frame_name>laser_frame</frame_name>
+        <frame_name>laser</frame_name>
       </plugin>
     </sensor>
   </gazebo>

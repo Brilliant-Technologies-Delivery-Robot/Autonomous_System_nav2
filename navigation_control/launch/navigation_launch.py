@@ -80,7 +80,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             'params_file',
-            default_value=os.path.join(bringup_dir, 'config', 'nav2_params.yaml'),
+            default_value=os.path.join(bringup_dir, 'config', 'nav2_params_sim.yaml'),
             description='Full path to the ROS2 parameters file to use'),
 
         DeclareLaunchArgument(
@@ -99,7 +99,8 @@ def generate_launch_description():
             executable='controller_server',
             output='screen',
             parameters=[configured_params],
-            remappings=remappings),
+            remappings=[('/cmd_vel', '/hoverboard_velocity_controller/cmd_vel')]),
+            
 
         Node(
             package='nav2_planner',

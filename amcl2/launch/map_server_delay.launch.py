@@ -92,20 +92,20 @@ def generate_launch_description():
 
     lifecycle_nodes = ["map_server","amcl"]
     use_sim_time = False
-    autostart = False
+    autostart = True
 
-  #  start_lifecycle_manager_cmd = Node(
-   #     package="nav2_lifecycle_manager",
-    #    executable="lifecycle_manager",
-     #   name="lifecycle_manager",
-      #  output="screen",
-       # emulate_tty=True,
-        #parameters=[
-         #   {"use_sim_time": use_sim_time},
-          #  {"autostart": autostart},
-           # {"node_names": lifecycle_nodes},
-        #],
-    #)
+    start_lifecycle_manager_cmd = Node(
+        package="nav2_lifecycle_manager",
+        executable="lifecycle_manager",
+        name="lifecycle_manager",
+        output="screen",
+        emulate_tty=True,
+        parameters=[
+            {"use_sim_time": use_sim_time},
+            {"autostart": autostart},
+            {"node_names": lifecycle_nodes},
+        ],
+    )
 
     # Create launch description and add actions
     ld = LaunchDescription()
@@ -116,6 +116,6 @@ def generate_launch_description():
     ld.add_action(amcl_param_file_arg) # Add the parameter file argument
     ld.add_action(map_server_cmd)
     ld.add_action(amcl_cmd)
-    #ld.add_action(start_lifecycle_manager_cmd)
+    ld.add_action(start_lifecycle_manager_cmd)
 
     return ld

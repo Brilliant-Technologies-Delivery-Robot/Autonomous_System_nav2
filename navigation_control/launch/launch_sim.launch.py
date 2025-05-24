@@ -33,9 +33,10 @@ def generate_launch_description():
     # Command(['xacro ', urdf_path, ' ', 'use_ros2_control:=true']),
     # value_type=str)
     rsp = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','rsp.launch.py'
-                )]), launch_arguments={'use_sim_time': 'false ', 'use_ros2_control': 'true'}.items()
+         PythonLaunchDescriptionSource([os.path.join(
+              get_package_share_directory(package_name),'launch','rsp.launch.py'
+                )]), 
+              launch_arguments={'use_sim_time': 'false ', 'use_ros2_control': 'false'}.items()
     )
     
     
@@ -52,7 +53,7 @@ def generate_launch_description():
       #      os.path.join(get_package_share_directory('slam'), 'launch', 'online_async_launch.py')
        # ),
         #launch_arguments={
-         #   'use_sim_time': 'false',
+         #  'use_sim_time': 'false',
           # 'params_file': os.path.join(get_package_share_directory('slam'), 'config', 'mapper_params_online_async.yaml')
         #}.items()
     #)
@@ -62,15 +63,15 @@ def generate_launch_description():
            os.path.join(get_package_share_directory('slam'), 'launch', 'localization_launch.py')
        ),
        launch_arguments={
-           'use_sim_time': 'false',
+          'use_sim_time': 'False',
           'params_file': os.path.join(get_package_share_directory('slam'), 'config', 'mapper_params_localization.yaml')
         }.items()
    )
     
- #   amcl_launch = IncludeLaunchDescription(
-  #      PythonLaunchDescriptionSource(
-   #       os.path.join(get_package_share_directory('amcl2'), 'launch', 'map_server_delay.launch.py')
-    #   )
+    #amcl_launch = IncludeLaunchDescription(
+     #   PythonLaunchDescriptionSource(
+      #    os.path.join(get_package_share_directory('amcl2'), 'launch', 'map_server_delay.launch.py')
+       #)
    #)
     
     
@@ -158,9 +159,9 @@ def generate_launch_description():
 
     rviz_node = Node(
         package='rviz2',
-         executable='rviz2',
-         name='rviz2',
-         output='screen',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
         arguments=['-d', rvizConfigPath]  # Pass the RViz config file
      )
 
